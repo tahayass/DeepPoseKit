@@ -51,7 +51,6 @@ class DLCDataGenerator(BaseGenerator):
 
         self.n_samples = self.annotations.shape[0]
         self.index = np.arange(self.n_samples)
-        print('yes!')
         super(DLCDataGenerator, self).__init__(**kwargs)
 
     def compute_image_shape(self):
@@ -67,6 +66,7 @@ class DLCDataGenerator(BaseGenerator):
             row = self.annotations.iloc[idx]
             image_name = row.name
             filepath = self.project_path + image_name
+            '''
             if os.path.exists(filepath):
                 image=cv2.imread(filepath)
                 print(image.shape)
@@ -74,6 +74,7 @@ class DLCDataGenerator(BaseGenerator):
                 images.append(cv2.imread(filepath))
             else:
                 raise IndexError("image `{}` does not exist".format(image_name))
+            '''
         return np.stack(images)
 
     def get_keypoints(self, indexes):
