@@ -69,7 +69,7 @@ class DLCDataGenerator(BaseGenerator):
                 image=cv2.imread(filepath)
                 print(image.shape)
                 image=cv2.resize(image,self.resize)
-                images.append(cv2.imread(filepath))
+                images.append(image)
             else:
                 raise IndexError("image `{}` does not exist".format(image_name))
         return np.stack(images)
