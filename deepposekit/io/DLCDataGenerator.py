@@ -67,8 +67,7 @@ class DLCDataGenerator(BaseGenerator):
             filepath = self.project_path + image_name
             if os.path.exists(filepath):
                 image=cv2.imread(filepath)
-                print(image.shape)
-                image=cv2.resize(image,self.resize)
+                image=cv2.flip(cv2.resize(image,self.resize),0)
                 images.append(image)
             else:
                 raise IndexError("image `{}` does not exist".format(image_name))
@@ -79,10 +78,13 @@ class DLCDataGenerator(BaseGenerator):
         keypoints = []
         for idx in indexes:
             row = self.annotations.iloc[idx]
+            image_name = row.name
+            filepath = self.project_path + image_name
+            image_shape=cv2.imread(filepath).shape
             coords = []
             for part in self.bodyparts:
-                x = row[(self.scorer, part, "x")]
-                y = row[(self.scorer, part, "y")]
+                x = (row[(self.scorer, part, "x")]*image_shape[1])/self.resize[1]
+                y = (row[(self.scorer, part, "y")]*image_shape[0])/self.resize[0]
                 coords.append([x, y])
             coords = np.array(coords)
             keypoints.append(coords)
