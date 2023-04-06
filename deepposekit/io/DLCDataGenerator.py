@@ -81,10 +81,11 @@ class DLCDataGenerator(BaseGenerator):
             image_name = row.name
             filepath = self.project_path + image_name
             image_shape=cv2.imread(filepath).shape
+            print(image_shape)
             coords = []
             for part in self.bodyparts:
-                x = (row[(self.scorer, part, "x")]*image_shape[0])/self.resize[0]
-                y = (row[(self.scorer, part, "y")]*image_shape[1])/self.resize[1]
+                x = (row[(self.scorer, part, "x")]*image_shape[1])/self.resize[1]
+                y = (row[(self.scorer, part, "y")]*image_shape[0])/self.resize[0]
                 coords.append([x, y])
             coords = np.array(coords)
             keypoints.append(coords)
