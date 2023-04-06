@@ -84,8 +84,8 @@ class DLCDataGenerator(BaseGenerator):
             print(image_shape)
             coords = []
             for part in self.bodyparts:
-                x = (row[(self.scorer, part, "x")])
-                y = ((image_shape[0]-row[(self.scorer, part, "y")]))
+                x = (row[(self.scorer, part, "x")]*self.resize[1])/image_shape[1]
+                y = ((image_shape[0]-row[(self.scorer, part, "y")])*self.resize[0])/image_shape[0]
                 coords.append([x, y])
             coords = np.array(coords)
             keypoints.append(coords)
