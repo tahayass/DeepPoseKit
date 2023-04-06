@@ -51,7 +51,7 @@ class DLCDataGenerator(BaseGenerator):
 
         self.n_samples = self.annotations.shape[0]
         self.index = np.arange(self.n_samples)
-
+        print('yes!')
         super(DLCDataGenerator, self).__init__(**kwargs)
 
     def compute_image_shape(self):
