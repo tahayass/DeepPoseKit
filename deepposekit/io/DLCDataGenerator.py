@@ -36,7 +36,7 @@ class DLCDataGenerator(BaseGenerator):
         e.g. '/path/to/project/'
     """
 
-    def __init__(self, project_path, **kwargs):
+    def __init__(self, project_path,resize, **kwargs):
         self.project_path = project_path
         self.annotations_path = glob.glob(self.project_path + "/**/**/*.h5")
         annotations = [pd.read_hdf(datapath) for datapath in self.annotations_path]
@@ -47,7 +47,7 @@ class DLCDataGenerator(BaseGenerator):
 
         self.bodyparts = self.dlcconfig["bodyparts"]
         self.scorer = self.dlcconfig["scorer"]
-
+        self.resize=resize
         self.n_samples = self.annotations.shape[0]
         self.index = np.arange(self.n_samples)
         super(DLCDataGenerator, self).__init__(**kwargs)
