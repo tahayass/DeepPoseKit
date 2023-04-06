@@ -36,12 +36,11 @@ class DLCDataGenerator(BaseGenerator):
         e.g. '/path/to/project/'
     """
 
-    def __init__(self, project_path,resize, **kwargs):
+    def __init__(self, project_path, **kwargs):
         self.project_path = project_path
         self.annotations_path = glob.glob(self.project_path + "/**/**/*.h5")
         annotations = [pd.read_hdf(datapath) for datapath in self.annotations_path]
         self.annotations = pd.concat(annotations)
-        self.resize=resize
         with open(project_path + "/config.yaml", "r") as config_file:
             self.dlcconfig = yaml.load(config_file, Loader=yaml.SafeLoader)
         self.n_keypoints = len(self.dlcconfig["bodyparts"])
@@ -66,7 +65,6 @@ class DLCDataGenerator(BaseGenerator):
             row = self.annotations.iloc[idx]
             image_name = row.name
             filepath = self.project_path + image_name
-            '''
             if os.path.exists(filepath):
                 image=cv2.imread(filepath)
                 print(image.shape)
@@ -74,7 +72,6 @@ class DLCDataGenerator(BaseGenerator):
                 images.append(cv2.imread(filepath))
             else:
                 raise IndexError("image `{}` does not exist".format(image_name))
-            '''
         return np.stack(images)
 
     def get_keypoints(self, indexes):
