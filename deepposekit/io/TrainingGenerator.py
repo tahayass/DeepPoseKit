@@ -195,9 +195,9 @@ class TrainingGenerator(Sequence):
     def __len__(self):
         """The number of batches per epoch"""
         if self.validation:
-            return int(float(self.n_validation) // self.batch_size)
+            return int(float(self.n_validation) // float(self.batch_size))
         else:
-            return int(float(self.n_train) // self.batch_size)
+            return int(float(self.n_train) // float(self.batch_size))
 
     def __call__(self, n_outputs=1, batch_size=32, validation=False, confidence=True):
         """ Sets the number of outputs and the batch size
