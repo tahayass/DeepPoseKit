@@ -81,7 +81,6 @@ class DLCDataGenerator(BaseGenerator):
             image_name = row.name
             filepath = self.project_path + image_name
             image_shape=cv2.imread(filepath).shape
-            print(image_shape)
             coords = []
             for part in self.bodyparts:
                 x = (row[(self.scorer, part, "x")])*self.resize[0]/image_shape[1]
