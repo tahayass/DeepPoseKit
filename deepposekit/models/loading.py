@@ -82,7 +82,7 @@ def load_model(path, generator=None, augmenter=None, custom_objects=None, compil
         train_generator_config = h5file.attrs.get("train_generator_config")
         if train_generator_config is None:
             raise ValueError("No data generator found in config file")
-        train_generator_config = json.loads(train_generator_config.decode("utf-8"))[
+        train_generator_config = json.loads(train_generator_config)[
             "config"
         ]
 
