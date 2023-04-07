@@ -89,8 +89,8 @@ def load_model(path, generator=None, augmenter=None, custom_objects=None, compil
         model_config = h5file.attrs.get("pose_model_config")
         if model_config is None:
             raise ValueError("No pose model found in config file")
-        model_name = json.loads(model_config.decode("utf-8"))["class_name"]
-        model_config = json.loads(model_config.decode("utf-8"))["config"]
+        model_name = json.loads(model_config)["class_name"]
+        model_config = json.loads(model_config)["config"]
 
     if generator is not None:
         signature = inspect.signature(TrainingGenerator.__init__)
