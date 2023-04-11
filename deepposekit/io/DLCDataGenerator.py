@@ -64,7 +64,15 @@ class DLCDataGenerator(BaseGenerator):
         for idx in indexes:
             row = self.annotations.iloc[idx]
             image_name = row.name
-            filepath = self.project_path + image_name
+            
+            if isinstance(image_name,tuple):
+                image_path=r''
+                for name in image_name:
+                    image_path=os.path.join(image_path,name)
+                filepath = self.project_path + image_path
+            else:
+                filepath = self.project_path + image_name
+            
             if os.path.exists(filepath):
                 image=cv2.imread(filepath)
                 image=cv2.flip(cv2.resize(image,self.resize),0)
