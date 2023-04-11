@@ -87,9 +87,14 @@ class DLCDataGenerator(BaseGenerator):
         for idx in indexes:
             row = self.annotations.iloc[idx]
             image_name = row.name
-            print(image_name)
-            print(self.project_path)
-            filepath = self.project_path + image_name
+            if isinstance(image_name,tuple):
+                image_path=r''
+                for name in image_name:
+                    image_path=os.path.join(image_path,name)
+                filepath = self.project_path + image_path
+            else:
+                filepath = self.project_path + image_name
+
             image_shape=cv2.imread(filepath).shape
             coords = []
             for part in self.bodyparts:
