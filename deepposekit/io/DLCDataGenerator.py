@@ -40,8 +40,6 @@ class DLCDataGenerator(BaseGenerator):
         self.project_path = project_path
         self.annotations_path = glob.glob(self.project_path + "/labeled-data/**/*.h5")
         annotations = [pd.read_hdf(datapath) for datapath in self.annotations_path]
-        for i in range(len(annotations)):
-            print(annotations[i])
         self.annotations = pd.concat(annotations)
         with open(project_path + "/config.yaml", "r") as config_file:
             self.dlcconfig = yaml.load(config_file, Loader=yaml.SafeLoader)
@@ -96,7 +94,7 @@ class DLCDataGenerator(BaseGenerator):
                 filepath = self.project_path + image_path
             else:
                 filepath = self.project_path + image_name
-
+            print(filepath)
             image_shape=cv2.imread(filepath).shape
             coords = []
             for part in self.bodyparts:
