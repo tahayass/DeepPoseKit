@@ -39,7 +39,7 @@ class DLCDataGenerator(BaseGenerator):
     def __init__(self, project_path,resize, **kwargs):
         self.project_path = project_path
         self.annotations_path = glob.glob(self.project_path + "/**/**/*.h5")
-        annotations = [pd.read_hdf(datapath) for datapath in self.annotations_path]
+        annotations = [pd.read_hdf(datapath,key='key') for datapath in self.annotations_path]
         self.annotations = pd.concat(annotations)
         with open(project_path + "/config.yaml", "r") as config_file:
             self.dlcconfig = yaml.load(config_file, Loader=yaml.SafeLoader)
