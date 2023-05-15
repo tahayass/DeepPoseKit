@@ -38,7 +38,7 @@ class DLCDataGenerator(BaseGenerator):
 
     def __init__(self, project_path,resize, **kwargs):
         self.project_path = project_path
-        self.annotations_path = glob.glob(self.project_path + "/**/**/*.h5")
+        self.annotations_path = glob.glob(self.project_path + "/labeled-data/**/*.h5")
         annotations = [pd.read_hdf(datapath) for datapath in self.annotations_path]
         for i in range(len(annotations)):
             print(annotations[i])
