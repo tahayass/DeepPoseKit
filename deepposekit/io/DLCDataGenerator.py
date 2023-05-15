@@ -49,7 +49,6 @@ class DLCDataGenerator(BaseGenerator):
         self.scorer = self.dlcconfig["scorer"]
         self.resize=resize
         self.n_samples = self.annotations.shape[0]
-        print(self.n_samples)
         self.index = np.arange(self.n_samples)
         super(DLCDataGenerator, self).__init__(**kwargs)
 
@@ -88,6 +87,7 @@ class DLCDataGenerator(BaseGenerator):
         for idx in indexes:
             row = self.annotations.iloc[idx]
             image_name = row.name
+            print(image_name)
             if isinstance(image_name,tuple):
                 image_path=r''
                 for name in image_name:
