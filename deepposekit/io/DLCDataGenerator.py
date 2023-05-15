@@ -94,7 +94,6 @@ class DLCDataGenerator(BaseGenerator):
                 filepath = os.path.join(self.project_path,image_path)
             else:
                 filepath = os.path.join(self.project_path,image_name)
-            print(filepath)
             image_shape=cv2.imread(filepath).shape
             coords = []
             for part in self.bodyparts:
