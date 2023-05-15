@@ -63,6 +63,7 @@ class DLCDataGenerator(BaseGenerator):
         images = []
         for idx in indexes:
             row = self.annotations.iloc[idx]
+            print(row)
             image_name = row.name
             
             if isinstance(image_name,tuple):
@@ -87,7 +88,6 @@ class DLCDataGenerator(BaseGenerator):
         for idx in indexes:
             row = self.annotations.iloc[idx]
             image_name = row.name
-            print(image_name)
             if isinstance(image_name,tuple):
                 image_path=r''
                 for name in image_name:
